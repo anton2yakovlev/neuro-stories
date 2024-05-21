@@ -1,2 +1,4 @@
 fastapi
 pydantic_settings
+sqlalchemy
+greenlet
