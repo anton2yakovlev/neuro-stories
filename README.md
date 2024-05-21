@@ -1,1 +1,1 @@
-# neuro-stories
+# Neuro Stories
