@@ -4,3 +4,4 @@ sqlalchemy
 greenlet
 asyncpg
 psycopg2
+alembic
