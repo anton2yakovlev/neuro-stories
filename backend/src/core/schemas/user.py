@@ -3,11 +3,11 @@ from pydantic import BaseModel
 
 class UserBase(BaseModel):
     username: str
-    active_user: bool
+    active_user: bool | None
 
 
 class UserCreate(UserBase):
-    password: str
+    hashed_password: str
 
 
 class UserRead(UserBase):

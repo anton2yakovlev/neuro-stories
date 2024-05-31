@@ -7,6 +7,7 @@ from .base import Base
 
 class User(Base):
     username: Mapped[str] = mapped_column(unique=True)
+    hashed_password: Mapped[str] = mapped_column()
     active_user: Mapped[bool] = mapped_column()
 
     __table_args__ = tuple(UniqueConstraint("username", "active_user"))
