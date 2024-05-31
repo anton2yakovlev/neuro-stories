@@ -7,7 +7,7 @@ class UserBase(BaseModel):
 
 
 class UserCreate(UserBase):
-    hashed_password: str
+    hashed_password: str | None
 
 
 class UserRead(UserBase):
