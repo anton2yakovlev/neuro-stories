@@ -1,6 +1,7 @@
 import uvicorn
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
+from fastapi.responses import ORJSONResponse
 from api import router as api_router
 
 from core.models.db_helper import db_helper
@@ -15,7 +16,7 @@ async def lifespan(app: FastAPI):
     await db_helper.dispose()
 
 
-app = FastAPI(lifespan=lifespan)
+app = FastAPI(default_response_class=ORJSONResponse, lifespan=lifespan)
 app.include_router(api_router, prefix=settings.api.prefix)
 
 
