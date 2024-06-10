@@ -3,9 +3,10 @@ from sqlalchemy.orm import mapped_column
 from sqlalchemy import UniqueConstraint
 
 from .base import Base
+from .mixins.int_id_pk import IntIdPkMixin
 
 
-class User(Base):
+class User(IntIdPkMixin, Base):
     username: Mapped[str] = mapped_column(unique=True)
     hashed_password: Mapped[str] = mapped_column()
     active_user: Mapped[bool] = mapped_column()
