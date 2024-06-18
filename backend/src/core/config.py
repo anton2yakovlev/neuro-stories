@@ -1,6 +1,9 @@
+from pathlib import Path
 from pydantic import BaseModel
 from pydantic import PostgresDsn
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+BASE_DIR = Path(__file__).parent.parent
 
 
 class RunConfig(BaseModel):
@@ -17,6 +20,12 @@ class ApiV1Prefix(BaseModel):
 class ApiPrefix(BaseModel):
     prefix: str = "/api"
     v1: ApiV1Prefix = ApiV1Prefix()
+
+
+class AuthJWT(BaseModel):
+    public_key_path: Path = BASE_DIR / "utils" / "certs" / "jwt-public.pem"
+    private_key_path: Path = BASE_DIR / "utils" / "certs" / "jwt-private.pem"
+    algorithm: str = "RS256"
 
 
 class DatabaseConfig(BaseModel):
@@ -37,6 +46,7 @@ class Settings(BaseSettings):
     run: RunConfig = RunConfig()
     api: ApiPrefix = ApiPrefix()
     db: DatabaseConfig
+    auth_jwt: AuthJWT = AuthJWT()
 
 
 settings = Settings()
