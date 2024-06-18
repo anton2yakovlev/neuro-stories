@@ -6,3 +6,4 @@ asyncpg
 psycopg2
 alembic
 pyjwt
+bcrypt
