@@ -8,6 +8,8 @@ from core.models import db_helper
 from core.models.user import User
 from core.schemas.user import CreateUser, ReadUser
 
+from core.auth.password import hash_password
+
 router = APIRouter(prefix=settings.api.v1.users, tags=["Users"])
 
 
@@ -24,5 +26,6 @@ async def create_user(
     user_create: CreateUser,
     session: Annotated[AsyncSession, Depends(db_helper.session_getter)],
 ) -> User:
+    user_create.hashed_password = hash_password(user_create.hashed_password)
     user = await create_new_user(user_create=user_create, session=session)
     return user

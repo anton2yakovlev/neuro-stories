@@ -11,9 +11,9 @@ class BaseUser(BaseModel):
 
 
 class CreateUser(BaseUser):
-    password: bytes
+    hashed_password: str | bytes
 
 
-class ReadUser(BaseModel):
+class ReadUser(BaseUser):
     id: int
     active: bool = True

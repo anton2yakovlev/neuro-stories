@@ -10,6 +10,6 @@ class User(IntIdPkMixin, Base):
     username: Mapped[str] = mapped_column(unique=True)
     email: Mapped[str] = mapped_column(unique=True)
     hashed_password: Mapped[str] = mapped_column()
-    active: Mapped[bool] = mapped_column()
+    active: Mapped[bool] = mapped_column(default=True)
 
     __table_args__ = tuple(UniqueConstraint("username", "active_user"))
