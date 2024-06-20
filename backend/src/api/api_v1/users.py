@@ -7,8 +7,11 @@ from core.config import settings
 from core.models import db_helper
 from core.models.user import User
 from core.schemas.user import CreateUser, ReadUser
+from core.schemas.token import TokenInfo
 
 from core.auth.password import hash_password
+from core.auth.login import validate_auth_user
+from core.auth.jwt_token import encode_jwt
 
 router = APIRouter(prefix=settings.api.v1.users, tags=["Users"])
 
@@ -29,3 +32,9 @@ async def create_user(
     user_create.hashed_password = hash_password(user_create.hashed_password)
     user = await create_new_user(user_create=user_create, session=session)
     return user
+
+
+@router.post("/login/", response_model=TokenInfo)
+def auth_user_jwt(user: ReadUser = Depends(validate_auth_user)):
+    token = encode_jwt(...)
+    return TokenInfo(access_token=token, token_type="Bearer")
