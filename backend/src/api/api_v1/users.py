@@ -36,5 +36,10 @@ async def create_user(
 
 @router.post("/login/", response_model=TokenInfo)
 def auth_user_jwt(user: ReadUser = Depends(validate_auth_user)):
-    token = encode_jwt(...)
+    jwt_payload = {
+        "sub": user.id,
+        "username": user.username,
+        "email": user.email,
+    }
+    token = encode_jwt(payload=jwt_payload)
     return TokenInfo(access_token=token, token_type="Bearer")

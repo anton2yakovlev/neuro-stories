@@ -26,6 +26,7 @@ class AuthJWT(BaseModel):
     public_key_path: Path = BASE_DIR / "utils" / "certs" / "jwt-public.pem"
     private_key_path: Path = BASE_DIR / "utils" / "certs" / "jwt-private.pem"
     algorithm: str = "RS256"
+    access_token_expire_minutes: int = 2
 
 
 class DatabaseConfig(BaseModel):
